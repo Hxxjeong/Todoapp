@@ -18,13 +18,13 @@ public class S3Service {
     private final String bucketName = "s3-bucket0610";
 
     // 파일 업로드
-    public void uploadFile(MultipartFile file) throws IOException {
-        String key = file.getOriginalFilename();  // S3에만 업로드하는 경우
+    public void uploadFile(MultipartFile file, String key) throws IOException {
+//        String key = file.getOriginalFilename();  // S3에만 업로드하는 경우
 
         s3Client.putObject(
                 PutObjectRequest.builder()
                         .bucket(bucketName)
-                        .key(key)
+                        .key(key)   // 경로를 포함한 파일 이름
                         .build(),
                 RequestBody.fromBytes(file.getBytes())
         );
